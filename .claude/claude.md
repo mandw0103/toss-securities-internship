@@ -62,11 +62,19 @@
 - 커밋 메시지는 **gitmoji**를 사용하고 **한글**로 작성한다
 - 예시: `✨ 홈 화면 레이아웃 구현`, `🐛 검색 결과 정렬 버그 수정`
 
+## 스킬 규칙
+
+- 스킬은 `.claude/skills/<스킬명>/SKILL.md` 형태로 관리한다
+- 스킬 파일에는 반드시 YAML frontmatter 메타 정보(name, description 등)를 포함한다
+
 ## 디렉토리 구조
 
 ```
 /
-├── .claude/claude.md    # 이 파일 (운영 규칙)
+├── .claude/
+│   ├── claude.md        # 이 파일 (운영 규칙)
+│   └── skills/          # 스킬 정의
+│       └── <스킬명>/SKILL.md
 ├── docs/
 │   ├── planning/        # 기획서 (Confluence 동기화)
 │   ├── spec/            # FE 스펙 문서
