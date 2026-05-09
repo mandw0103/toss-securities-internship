@@ -1,0 +1,11 @@
+.search-result-item {
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 15px;
+  color: #333;
+  transition: background-color 0.1s;
+}
+
+.search-result-item:hover {
+  background-color: #f5f5f5;
+}

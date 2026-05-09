@@ -1,0 +1,11 @@
+.logo-link {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.logo-img {
+  height: 26px;
+  width: auto;
+}

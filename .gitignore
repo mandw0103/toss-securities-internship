@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# MCP config (API 토큰 포함)
+.mcp.json
+.claude/settings.json
