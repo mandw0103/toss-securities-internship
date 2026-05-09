@@ -44,8 +44,14 @@
 │   └── skills/          # 스킬 정의
 │       └── <스킬명>/SKILL.md
 ├── docs/
-│   ├── planning/        # 기획서 (Confluence 동기화)
-│   ├── spec/            # FE 스펙 문서
-│   └── adr/             # 아키텍처 결정 기록
+│   ├── planning/                # 기획서 (Confluence 동기화)
+│   │   ├── 00-template.md
+│   │   ├── common/              # 여러 페이지에서 공통으로 쓰이는 요소 (예: header)
+│   │   └── <페이지명>/           # 특정 페이지 전용 요소 (예: home/filter, home/list)
+│   ├── spec/                    # FE 스펙 문서 (planning과 동일한 분류 구조)
+│   │   ├── 00-template.md
+│   │   ├── common/
+│   │   └── <페이지명>/
+│   └── adr/                     # 아키텍처 결정 기록
 └── src/                 # 소스 코드
 ```
