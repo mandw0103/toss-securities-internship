@@ -1,6 +1,6 @@
 # 공통 > 헤더 FE 스펙
 
-> 기획서: [docs/planning/01-header.md](../planning/01-header.md)
+> 기획서: [docs/planning/common/01-header.md](../../planning/common/01-header.md)
 > 작성일: 2026-04-13
 > 상태: 리뷰 중
 
