@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { searchStocks } from '../../apis/stocks';
-import type { Stock } from '../../apis/stocks';
+import { searchStocks } from '../../mocks/stocks';
+import type { StockSearchResult } from '../../types/stock';
 import SearchDropdown from './SearchDropdown';
 import './SearchBar.css';
 
@@ -70,10 +70,10 @@ export default function SearchBar() {
     }
   };
 
-  const handleSelect = useCallback((stock: Stock) => {
+  const handleSelect = useCallback((stock: StockSearchResult) => {
     setIsOpen(false);
     setQuery('');
-    navigate(`/stocks/${stock.id}`);
+    navigate(`/stocks/${stock.stockId}`);
   }, [navigate]);
 
   const showDropdown = isOpen && debouncedQuery.length > 0;
@@ -92,7 +92,7 @@ export default function SearchBar() {
       />
       {showDropdown && (
         <SearchDropdown
-          results={data?.stocks ?? []}
+          results={data ?? []}
           isLoading={isLoading}
           isError={isError}
           onSelect={handleSelect}

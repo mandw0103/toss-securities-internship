@@ -1,12 +1,12 @@
-import type { Stock } from '../../apis/stocks';
+import type { StockSearchResult } from '../../types/stock';
 import SearchResultItem from './SearchResultItem';
 import './SearchDropdown.css';
 
 interface SearchDropdownProps {
-  results: Stock[];
+  results: StockSearchResult[];
   isLoading: boolean;
   isError: boolean;
-  onSelect: (stock: Stock) => void;
+  onSelect: (stock: StockSearchResult) => void;
 }
 
 export default function SearchDropdown({ results, isLoading, isError, onSelect }: SearchDropdownProps) {
@@ -38,7 +38,7 @@ export default function SearchDropdown({ results, isLoading, isError, onSelect }
     <ul className="search-dropdown">
       {results.map((stock) => (
         <SearchResultItem
-          key={stock.id}
+          key={stock.stockId}
           name={stock.name}
           onClick={() => onSelect(stock)}
         />
