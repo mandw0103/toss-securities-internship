@@ -43,7 +43,7 @@
 - 문서와 코드가 안 맞으면 머지 자체가 안 되게 막는다. 사람이 깜빡해도 통과가 안 된다.
 - GitHub Branch Protection으로 main 머지를 막고, GitHub Actions가 PR마다 두 검사를 돌려 통과해야 풀어준다.
   - **결정적 검사(기계)**: `src/**`는 바뀌었는데 `docs/**`는 안 바뀌었고 `no-spec-change` 라벨도 없으면 → 실패 — **[2a 개발 완료]** (`.github/workflows/sync-gate.yml`; main Branch Protection required check 등록은 별도 admin 작업)
-  - **AI 검사(Claude)**: PR diff를 읽어 스펙에 없는 동작·빠진 예외 처리가 있으면 경고 코멘트, 붙은 라벨이 정당한지도 감사 — **[2b 개발 생략]** (1인 리뷰 체제가 커버하여 인턴십 범위에서 제외; 기여자 증가·라벨 남용 시 재고)
+  - **AI 검사(현재 사용 AI 도구)**: PR diff를 읽어 스펙에 없는 동작·빠진 예외 처리가 있으면 경고 코멘트, 붙은 라벨이 정당한지도 감사한다. 현재 사용하는 도구가 Claude면 Claude를, Codex면 Codex를 사용한다. — **[2b 개발 생략]** (1인 리뷰 체제가 커버하여 인턴십 범위에서 제외; 기여자 증가·라벨 남용 시 재고)
 
 
 
@@ -64,7 +64,7 @@
 ### 선택
 
 **5. 원본 기획(Confluence)과의 동기화** **[개발 생략 — 인턴십 범위 외]**
-- 웹훅 수신 서버 대신(인턴 프로젝트엔 과함) 스케줄된 Claude + Atlassian MCP가 Confluence ↔ `docs/planning`을 비교(in)하고, 머지 시 AI가 Confluence 상태 변경을 **제안**한다(정본 자동 쓰기는 위험 → 사람 확인 후).
+- 웹훅 수신 서버 대신(인턴 프로젝트엔 과함) 스케줄된 현재 사용 AI 도구 + Atlassian MCP가 Confluence ↔ `docs/planning`을 비교(in)하고, 머지 시 AI가 Confluence 상태 변경을 **제안**한다. 현재 사용하는 도구가 Claude면 Claude를, Codex면 Codex를 사용한다(정본 자동 쓰기는 위험 → 사람 확인 후).
 - 단, 이는 "코드가 공백을 메웠는데 미반영"과는 **다른 종류의 불일치**라 분리해서 본다.
 
 ## 표준 사이클 (1·2가 맞물리는 흐름)
@@ -89,7 +89,7 @@
 
 ## 분류 규칙
 
-- **도구/CI/자동화 작업은 `docs/planning`·`docs/spec`(FE 피처용)이 아니라 ADR(`docs/adr`)로 기록한다.** 이 규칙을 CLAUDE.md 작업 사이클에 명시한다 (item 1 작업에 포함, 반영 완료).
+- **도구/CI/자동화 작업은 `docs/planning`·`docs/spec`(FE 피처용)이 아니라 ADR(`docs/adr`)로 기록한다.** 이 규칙은 현재 사용하는 AI 도구의 운영 규칙 문서에 명시한다. Claude를 사용하면 `CLAUDE.md`에, Codex를 사용하면 `AGENTS.md`와 `.codex/codex.md`에 반영한다 (item 1 작업에 포함, 반영 완료).
 
 ## 결과
 
