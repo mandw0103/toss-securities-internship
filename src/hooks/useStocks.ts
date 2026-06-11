@@ -1,11 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchStocks } from '../mocks/stocks';
+import { fetchTossRankingStocks } from '../apis/tossRanking';
 import type { Stock } from '../types/stock';
 
 export function useStocks() {
   return useQuery<Stock[]>({
     queryKey: ['stocks'],
-    queryFn: fetchStocks,
+    queryFn: fetchTossRankingStocks,
     staleTime: Infinity,
+    refetchOnWindowFocus: false,
   });
 }

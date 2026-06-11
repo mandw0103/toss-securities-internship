@@ -134,6 +134,13 @@
   background-color: #f9fafb;
 }
 
+.chart-list-message {
+  padding: 40px 8px;
+  color: #6b7684;
+  font-size: 14px;
+  text-align: center;
+}
+
 .chart-list-cell {
   overflow: hidden;
   text-overflow: ellipsis;

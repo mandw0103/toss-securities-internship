@@ -10,9 +10,10 @@ import './chart-section.css';
 
 interface ChartSectionProps {
   stocks: Stock[];
+  stockError: Error | null;
 }
 
-export default function ChartSection({ stocks }: ChartSectionProps) {
+export default function ChartSection({ stocks, stockError }: ChartSectionProps) {
   const [activeTab, setActiveTab] = useState<ChartTab>('실시간 차트');
   const [filter, setFilter] = useState<ChartFilterState>(DEFAULT_FILTER);
 
@@ -20,7 +21,7 @@ export default function ChartSection({ stocks }: ChartSectionProps) {
     <section className="chart-section">
       <ChartSectionTabs activeTab={activeTab} onChange={setActiveTab} />
       <ChartSectionFilter value={filter} onChange={setFilter} />
-      <ChartSectionList stocks={stocks} filter={filter} />
+      <ChartSectionList stocks={stocks} filter={filter} stockError={stockError} />
     </section>
   );
 }

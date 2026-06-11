@@ -82,7 +82,7 @@ export default function ChartListRow({ rank, stock, period, sort }: ChartListRow
         </>
       )}
       <div className="chart-list-cell chart-list-cell-share">
-        {stock.tossSharePercent.toFixed(1)}%
+        {stock.tossSharePercent === null ? '' : `${stock.tossSharePercent.toFixed(1)}%`}
       </div>
       <div className="chart-list-cell chart-list-cell-summary">{stock.aiSummary}</div>
     </button>
