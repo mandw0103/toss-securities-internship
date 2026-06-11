@@ -43,7 +43,7 @@ jobs:
             // base...head 변경 파일 (#14 pr-body 워크플로와 같은 git 플러밍 재사용)
             const base = pr.base.sha;
             const head = pr.head.sha;
-            const changed = execSync(`git diff --name-only ${base}...${head}`, {
+            const changed = execSync(`git -c core.quotePath=false diff --name-only ${base}...${head}`, {
               encoding: 'utf8',
             })
               .split('\n')
