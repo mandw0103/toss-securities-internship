@@ -15,6 +15,7 @@ export interface Stock {
   name: string;
   market: Market;
   logoSeed: string;
+  logoImageUrl?: string;
   currentPrice: number;
   tossSharePercent: number | null;
   aiSummary: string;

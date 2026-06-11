@@ -28,6 +28,7 @@ interface TossRankingResponse {
 interface TossRankingProduct {
   productCode: string;
   name: string;
+  logoImageUrl?: string;
   price: {
     baseKrw: number;
     closeKrw: number;
@@ -48,6 +49,9 @@ function isTossRankingProduct(value: unknown): value is TossRankingProduct {
   if (!isRecord(value)) return false;
   if (typeof value.productCode !== 'string') return false;
   if (typeof value.name !== 'string') return false;
+  if (value.logoImageUrl !== undefined && typeof value.logoImageUrl !== 'string') {
+    return false;
+  }
   if (!isRecord(value.price)) return false;
 
   return (
@@ -117,6 +121,7 @@ function mapTossRankingProduct(product: TossRankingProduct): Stock {
     name: product.name,
     market: inferMarket(product.productCode),
     logoSeed: product.name.slice(0, 1),
+    logoImageUrl: product.logoImageUrl,
     currentPrice: product.price.closeKrw,
     tossSharePercent: null,
     aiSummary: '',

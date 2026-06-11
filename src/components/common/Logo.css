@@ -7,4 +7,13 @@
   font-weight: 700;
   flex-shrink: 0;
   user-select: none;
+  overflow: hidden;
+  background-size: cover;
+}
+
+.common-logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }

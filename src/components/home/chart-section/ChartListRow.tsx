@@ -63,7 +63,7 @@ export default function ChartListRow({ rank, stock, period, sort }: ChartListRow
     >
       <div className="chart-list-cell chart-list-cell-rank">{rank}</div>
       <div className="chart-list-cell chart-list-cell-logo">
-        <Logo logoSeed={stock.logoSeed} size={32} />
+        <Logo logoSeed={stock.logoSeed} logoImageUrl={stock.logoImageUrl} size={32} />
       </div>
       <div className="chart-list-cell chart-list-cell-name">{stock.name}</div>
       <div className="chart-list-cell chart-list-cell-price">{formatPrice(stock.currentPrice)}</div>
