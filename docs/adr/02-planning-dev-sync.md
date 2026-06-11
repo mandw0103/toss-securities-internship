@@ -43,6 +43,7 @@
 - 문서와 코드가 안 맞으면 머지 자체가 안 되게 막는다. 사람이 깜빡해도 통과가 안 된다.
 - GitHub Branch Protection으로 main 머지를 막고, GitHub Actions가 PR마다 두 검사를 돌려 통과해야 풀어준다.
   - **결정적 검사(기계)**: `src/**`는 바뀌었는데 `docs/**`는 안 바뀌었고 `no-spec-change` 라벨도 없으면 → 실패 — **[2a 개발 완료]** (`.github/workflows/sync-gate.yml`; main Branch Protection required check 등록은 별도 admin 작업)
+    - 한글 파일명 경로가 `git diff --name-only`에서 quote/escape 처리되면 `docs/**` 감지가 실패할 수 있으므로, 게이트는 `git -c core.quotePath=false diff --name-only`로 변경 파일을 읽는다.
   - **AI 검사(현재 사용 AI 도구)**: PR diff를 읽어 스펙에 없는 동작·빠진 예외 처리가 있으면 경고 코멘트, 붙은 라벨이 정당한지도 감사한다. 현재 사용하는 도구가 Claude면 Claude를, Codex면 Codex를 사용한다. — **[2b 개발 생략]** (1인 리뷰 체제가 커버하여 인턴십 범위에서 제외; 기여자 증가·라벨 남용 시 재고)
 
 
