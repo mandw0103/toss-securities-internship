@@ -30,8 +30,10 @@ interface TossRankingProduct {
   name: string;
   logoImageUrl?: string;
   price: {
-    baseKrw: number;
-    closeKrw: number;
+    base: number;
+    close: number;
+    baseKrw: number | null;
+    closeKrw: number | null;
     tossSecuritiesVolume: number;
     tossSecuritiesAmount: number;
   };
@@ -55,8 +57,10 @@ function isTossRankingProduct(value: unknown): value is TossRankingProduct {
   if (!isRecord(value.price)) return false;
 
   return (
-    isNumber(value.price.baseKrw) &&
-    isNumber(value.price.closeKrw) &&
+    isNumber(value.price.base) &&
+    isNumber(value.price.close) &&
+    (value.price.baseKrw === null || isNumber(value.price.baseKrw)) &&
+    (value.price.closeKrw === null || isNumber(value.price.closeKrw)) &&
     isNumber(value.price.tossSecuritiesVolume) &&
     isNumber(value.price.tossSecuritiesAmount)
   );
@@ -88,7 +92,7 @@ function inferMarket(productCode: string): Market {
     return '해외';
   }
 
-  if (/^\d{6}$/.test(productCode)) {
+  if (/^A\d{6}$/.test(productCode) || /^\d{6}$/.test(productCode)) {
     return '국내';
   }
 
@@ -100,9 +104,17 @@ function calculateChangeRate(baseKrw: number, closeKrw: number): number {
   return Math.round(((closeKrw - baseKrw) / baseKrw) * 10000) / 100;
 }
 
+function resolveKrwPrice(product: TossRankingProduct): { base: number; close: number } {
+  return {
+    base: product.price.baseKrw ?? product.price.base,
+    close: product.price.closeKrw ?? product.price.close,
+  };
+}
+
 function createMetrics(product: TossRankingProduct): Record<string, PeriodMetrics> {
+  const krwPrice = resolveKrwPrice(product);
   const metric: PeriodMetrics = {
-    changeRate: calculateChangeRate(product.price.baseKrw, product.price.closeKrw),
+    changeRate: calculateChangeRate(krwPrice.base, krwPrice.close),
     tossTradingValue: product.price.tossSecuritiesAmount,
     tossTradingVolume: product.price.tossSecuritiesVolume,
     totalTradingValue: product.price.tossSecuritiesAmount,
@@ -116,13 +128,15 @@ function createMetrics(product: TossRankingProduct): Record<string, PeriodMetric
 }
 
 function mapTossRankingProduct(product: TossRankingProduct): Stock {
+  const krwPrice = resolveKrwPrice(product);
+
   return {
     stockId: product.productCode,
     name: product.name,
     market: inferMarket(product.productCode),
     logoSeed: product.name.slice(0, 1),
     logoImageUrl: product.logoImageUrl,
-    currentPrice: product.price.closeKrw,
+    currentPrice: krwPrice.close,
     tossSharePercent: null,
     aiSummary: '',
     metricsByPeriod: createMetrics(product),
