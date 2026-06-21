@@ -15,8 +15,9 @@ export interface Stock {
   name: string;
   market: Market;
   logoSeed: string;
+  logoImageUrl?: string;
   currentPrice: number;
-  tossSharePercent: number;
+  tossSharePercent: number | null;
   aiSummary: string;
   metricsByPeriod: Record<Period, PeriodMetrics>;
 }

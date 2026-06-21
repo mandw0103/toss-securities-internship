@@ -19,7 +19,7 @@ export default function RecommendedStockCard({ stock }: RecommendedStockCardProp
         onClick={() => navigate(`/stocks/${stock.stockId}`)}
       >
         <div className="indicator-card-stock-header">
-          <Logo logoSeed={stock.logoSeed} size={32} />
+          <Logo logoSeed={stock.logoSeed} logoImageUrl={stock.logoImageUrl} size={32} />
           <span className="indicator-card-stock-name">{stock.name}</span>
         </div>
         <Sparkline stockId={stock.stockId} />
