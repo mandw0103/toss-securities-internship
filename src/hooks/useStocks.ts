@@ -16,7 +16,8 @@ export function useStocks() {
   return useQuery<Stock[]>({
     queryKey: ['stocks'],
     queryFn: fetchStocksWithFallback,
-    staleTime: Infinity,
-    refetchOnWindowFocus: false,
+    staleTime: 0,
+    refetchOnMount: 'always',
+    refetchOnWindowFocus: true,
   });
 }
