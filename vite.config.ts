@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/toss-api': {
+      '/api/toss-ranking': {
         target: 'https://wts-cert-api.tossinvest.com',
         changeOrigin: true,
         headers: {
@@ -21,7 +21,7 @@ export default defineConfig({
             proxyReq.setHeader('referer', 'https://www.tossinvest.com/');
           });
         },
-        rewrite: (path) => path.replace(/^\/toss-api/, ''),
+        rewrite: () => '/api/v2/dashboard/wts/overview/ranking',
       },
     },
   },

@@ -1,7 +1,7 @@
 import type { Market, PeriodMetrics, Stock } from '../types/stock';
 import { PERIODS } from '../types/stock';
 
-const TOSS_RANKING_ENDPOINT = '/toss-api/api/v2/dashboard/wts/overview/ranking';
+const TOSS_RANKING_ENDPOINT = '/api/toss-ranking';
 
 const TOSS_RANKING_PAYLOAD = {
   id: 'biggest_total_amount',
