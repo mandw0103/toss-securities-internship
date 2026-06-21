@@ -28,9 +28,10 @@
 
 **선택지 2를 채택한다.** GitHub Actions 워크플로로 PR open 및 push 시 본문의 Commits 영역을 자동 생성·갱신한다.
 
-- **트리거**: `pull_request` 이벤트의 `opened`, `synchronize`, `reopened`
+- **트리거**: `pull_request_target` 이벤트의 `opened`, `synchronize`, `reopened`
 - **base/head 확인**: PR 이벤트 페이로드의 `github.event.pull_request.base.ref` / `head.ref`로 확인한다
-- **본문 생성 규칙**: `base..head` 커밋을 **오래된 순**으로 읽어 Commits 표를 만든다 (pull-request 스킬의 본문 형식·정렬 규칙을 따른다)
+- **본문 생성 규칙**: PR 커밋 목록을 GitHub API(`pulls.listCommits`)로 읽어 Commits 표를 만든다 (pull-request 스킬의 본문 형식·정렬 규칙을 따른다)
+- **fork PR 권한 대응**: fork에서 원본 레포로 여는 PR도 본문을 갱신할 수 있도록 `pull_request_target`을 사용한다. 대신 보안을 위해 PR head 코드를 checkout하거나 실행하지 않고, GitHub API로 커밋 메타데이터만 조회한다.
 - **자동/수동 영역 분리**: 본문에 마커를 두고 **마커 내부만 갱신**한다. Summary 등 작성자가 직접 입력한 텍스트는 보존한다.
   ```
   <!-- AUTO:commits:start -->
@@ -46,5 +47,6 @@
 
 - PR 본문의 Commits 표가 항상 최신 커밋과 일치하여, pull-request 스킬의 수기 검증 부담이 줄어든다.
 - 작성자가 직접 쓴 Summary 등은 갱신 과정에서 보존된다.
+- fork PR에서도 원본 레포 권한으로 PR 본문/실패 댓글을 갱신할 수 있다.
 - 이슈 #12의 자동 게이트가 이 워크플로의 브랜치/커밋 파싱·플러밍을 재사용할 수 있다.
 - 비차단 설계라 #12 게이트(차단)와 치명도가 명확히 구분된다.
